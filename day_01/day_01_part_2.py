@@ -1,15 +1,14 @@
-
 import os
-import collections
+
 
 def parse_input(file_path):
     # Parse the input file
-    with open(file_path, 'r') as file:
+    with open(file_path, "r") as file:
         # Read the entire file
         data = file.read().strip()
 
         # 2. Read as a list of lines
-        # return data.split('\n')
+        # return data.split("\n")
 
         # 3. Read as a list of integers
         # return [int(line) for line in data.split('\n')]
@@ -19,16 +18,39 @@ def parse_input(file_path):
 
         return data
 
+
+dirs = ((-1, 0), (0, 1), (1, 0), (0, -1))
+
+
 def solve(input_data):
-    print(input_data)
+    r, c, d = 0, 0, 0
+    visited = set()
+
+    for line in input_data.split(", "):
+        # print(visited)
+
+        dir_change = 1 if line[0] == "R" else -1
+        dist = int(line[1:])
+
+        d = ((d + dir_change) + 4) % 4
+
+        for i in range(dist):
+            r += dirs[d][0]
+            c += dirs[d][1]
+
+            if (r, c) in visited:
+                return abs(r) + abs(c)
+
+            visited.add((r, c))
+
 
 def main():
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Construct the input file path relative to the script's location
-    # input_path = os.path.join(script_dir, 'input.txt')
-    input_path = os.path.join(script_dir, 'sample_input.txt')
+    input_path = os.path.join(script_dir, "input.txt")
+    # input_path = os.path.join(script_dir, "sample_input.txt")
 
     # Parse input
     parsed_input = parse_input(input_path)
@@ -37,5 +59,6 @@ def main():
     result = solve(parsed_input)
     print(f"Solution for Day 01, Part Two: {result}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
