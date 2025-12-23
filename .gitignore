@@ -1,5 +1,6 @@
 # Ignore input text files for each day
 **/input.txt
+**/sample_input.txt
 # Python bytecode
 **pycache**/
 *.py[cod]

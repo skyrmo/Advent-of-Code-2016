@@ -20,15 +20,15 @@ def parse_input(file_path):
         return data
 
 def solve(input_data):
-    # Implement solution here
-    pass
+    print(input_data)
 
 def main():
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Construct the input file path relative to the script's location
-    input_path = os.path.join(script_dir, 'input.txt')
+    # input_path = os.path.join(script_dir, 'input.txt')
+    input_path = os.path.join(script_dir, 'sample_input.txt')
 
     # Parse input
     parsed_input = parse_input(input_path)
