@@ -21,7 +21,7 @@ def parse_input(file_path):
 
 
 def solve(input_data):
-    result = [False] * 8
+    result = [-1] * 8
     i = 1
     changed = 0
 
@@ -31,14 +31,12 @@ def solve(input_data):
         if hash.startswith("00000"):
             pos = int(hash[5], 16)
 
-            if pos < 8 and not result[pos]:
+            if pos < 8 and result[pos] < 0:
                 changed += 1
-                result[pos] = hash[6]
-
-            print(hash[5], int(hash[5], 16), changed, result)
+                result[pos] = ord(hash[6])
 
             if changed == 8:
-                return "".join(result)
+                return "".join([chr(x) for x in result])
 
         i += 1
 
