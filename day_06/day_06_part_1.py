@@ -1,5 +1,4 @@
 import os
-from collections import Counter
 
 
 def parse_input(file_path):
