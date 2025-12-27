@@ -24,8 +24,6 @@ def decompress(input):
     if not input:
         return 0
 
-    # print(input)
-
     # is there a marker starting fro this position?
     marker = re.match(r"^\((\d+)x(\d+)\)", input)
     if marker:
