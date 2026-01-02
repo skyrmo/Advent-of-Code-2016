@@ -72,9 +72,10 @@ class State:
 
     @property
     def bottom_floor(self) -> int:
-        for i in range(self.top_floor):
+        for i in range(self.top_floor - 1):
             if len(self.floors[i].items) > 0:
                 return i
+        return self.top_floor - 1
 
     def __repr__(self):
         return (
