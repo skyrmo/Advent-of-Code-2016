@@ -84,7 +84,7 @@ def solve(input_data):
                 value, bot_id = int(match.group(1)), int(match.group(2))
                 bots[bot_id].add_value(value)
 
-    q = deque(
+    q: deque[Bot] = deque(
         [
             bot
             for bot in bots.values()
@@ -93,7 +93,7 @@ def solve(input_data):
     )
 
     while q:
-        bot = q.popleft()
+        bot: Bot = q.popleft()
 
         # if bot.lo_val == 17 and bot.hi_val == 61:
         #     return bot.id

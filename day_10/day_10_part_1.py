@@ -1,6 +1,7 @@
 import os
 import re
 from collections import deque
+from typing import final
 
 
 def parse_input(file_path):
@@ -21,6 +22,7 @@ def parse_input(file_path):
         return data
 
 
+@final
 class Bot:
     def __init__(self, id):
         self.id = id
@@ -92,7 +94,7 @@ def solve(input_data):
     )
 
     while q:
-        bot = q.popleft()
+        bot: Bot = q.popleft()
 
         if bot.lo_val == 17 and bot.hi_val == 61:
             return bot.id
