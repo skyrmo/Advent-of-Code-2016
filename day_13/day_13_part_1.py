@@ -49,7 +49,7 @@ def solve(input_data):
     print("\n")
 
     q = collections.deque([(1, 1, 0)])
-    grid[1][1] = 0
+    grid[1][1] = "0"
 
     while q:
         r, c, steps = q.popleft()
@@ -61,7 +61,7 @@ def solve(input_data):
         for nr, nc in ((r - 1, c), (r, c + 1), (r + 1, c), (r, c - 1)):
             if 0 <= nr < h and 0 <= nc < w and grid[nr][nc] == ".":
                 q.append((nr, nc, steps + 1))
-                grid[nr][nc] = steps + 1
+                grid[nr][nc] = str(steps + 1)
 
     for row in grid:
         print(row)

@@ -1,5 +1,6 @@
 import collections
 import os
+from typing import Deque, List, Tuple
 
 
 def parse_input(file_path):
@@ -20,36 +21,34 @@ def parse_input(file_path):
         return data
 
 
-def solve(input_data):
-    num = 1362
-    tgt = (39, 31)
-    h, w = 40, 32
+def get_cell_Value(r, c, num) -> str:
+    return (
+        "."
+        if sum(
+            [
+                int(x)
+                for x in bin((c * c) + (3 * c) + (2 * c * r) + r + (r * r) + num)[2:]
+            ]
+        )
+        % 2
+        == 0
+        else "#"
+    )
 
-    grid = [["."] * w for _ in range(h)]
+
+def solve(input_data):
+    num: int = 1362
+    h: int = 40
+    w: int = 32
+
+    grid: List[List[str]] = [["."] * w for _ in range(h)]
 
     for r in range(h):
         for c in range(w):
-            grid[r][c] = (
-                "."
-                if sum(
-                    [
-                        int(x)
-                        for x in bin(
-                            (c * c) + (3 * c) + (2 * c * r) + r + (r * r) + num
-                        )[2:]
-                    ]
-                )
-                % 2
-                == 0
-                else "#"
-            )
+            grid[r][c] = get_cell_Value(r, c, num)
 
-    for row in grid:
-        print(row)
-    print("\n")
-
-    q = collections.deque([(1, 1, 0)])
-    grid[1][1] = 0
+    q: Deque[Tuple[int, int, int]] = collections.deque([(1, 1, 0)])
+    grid[1][1] = "0"
 
     while q:
         r, c, steps = q.popleft()
@@ -57,15 +56,12 @@ def solve(input_data):
         for nr, nc in ((r - 1, c), (r, c + 1), (r + 1, c), (r, c - 1)):
             if 0 <= nr < h and 0 <= nc < w and grid[nr][nc] == ".":
                 q.append((nr, nc, steps + 1))
-                grid[nr][nc] = steps + 1
+                grid[nr][nc] = str(steps + 1)
 
-    for row in grid:
-        print(row)
-
-    result = 0
+    result: int = 0
     for r in range(h):
         for c in range(w):
-            if grid[r][c] not in [".", "#"] and grid[r][c] <= 50:
+            if grid[r][c] not in [".", "#"] and int(grid[r][c]) <= 50:
                 result += 1
 
     return result
