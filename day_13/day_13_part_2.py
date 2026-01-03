@@ -22,25 +22,15 @@ def parse_input(file_path):
 
 
 def get_cell_Value(r, c, num) -> str:
-    return (
-        "."
-        if sum(
-            [
-                int(x)
-                for x in bin((c * c) + (3 * c) + (2 * c * r) + r + (r * r) + num)[2:]
-            ]
-        )
-        % 2
-        == 0
-        else "#"
-    )
+    num_bin = bin((c * c) + (3 * c) + (2 * c * r) + r + (r * r) + num)[2:]
+    num_bits = sum([int(x) for x in num_bin])
+    return "." if num_bits % 2 == 0 else "#"
 
 
 def solve(input_data):
     num: int = 1362
     h: int = 40
     w: int = 32
-
     grid: List[List[str]] = [["."] * w for _ in range(h)]
 
     for r in range(h):
