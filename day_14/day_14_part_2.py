@@ -42,7 +42,7 @@ def solve(input_data):
     while True:
         md5 = next_1000.popleft()
 
-        for j in range(30):
+        for j in range(30):  # 30 magic number = 32 bit hash length - 2
             if md5[j] == md5[j + 1] == md5[j + 2]:
                 for next_hash in next_1000:
                     if md5[j] * 5 in next_hash:
