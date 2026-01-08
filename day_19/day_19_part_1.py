@@ -20,8 +20,39 @@ def parse_input(file_path):
         return data
 
 
+class Node:
+    def __init__(self, id, val, next=None):
+        self.id = id
+        self.val = val
+        self.next = next
+
+    def __repr__(self):
+        return f"Node({self.id}, {self.val})"
+
+
 def solve(input_data):
-    print(input_data)
+    dummy_head = Node(-1, -1)
+    prev = dummy_head
+
+    for i in range(1, 3014388):
+        node = Node(i, 1)
+        prev.next = node
+        prev = node
+
+    prev.next = dummy_head.next
+
+    cur = dummy_head.next
+
+    while cur.next:
+        if cur.next.id == cur.id:
+            return cur.id
+
+        cur.val += cur.next.val
+        cur.next = cur.next.next
+
+        cur = cur.next
+
+    # return dummy_head.next.value
 
 
 def main():
