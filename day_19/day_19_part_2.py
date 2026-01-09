@@ -41,7 +41,7 @@ def solve(input_data):
             return j - log_pow
         else:
             # print(j, solve_for(j), j - log_pow + j - 2 * log_pow, j - log_pow + j - 2 * log_pow == solve_for(j))
-            return j - log_pow + j - 2 * low_pow
+            return j - log_pow + j - 2 * log_pow
 
 
 
